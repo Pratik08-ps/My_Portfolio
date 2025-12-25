@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pratik Shinde | Computer Management Student</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .playfair {
+            font-family: 'Playfair Display', serif;
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .card-hover {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .card-hover:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+        .blob {
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            animation: blob 8s ease-in-out infinite;
+        }
+        @keyframes blob {
+            0%, 100% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; }
+            25% { border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%; }
+            50% { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+            75% { border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%; }
+        }
+        .typing-cursor::after {
+            content: '|';
+            animation: blink 1s infinite;
+        }
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+        .skill-bar {
+            transition: width 1.5s ease-in-out;
+        }
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+    </style>
+</head>
+<body class="bg-gray-950 text-white overflow-x-hidden">
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#" class="text-2xl font-bold gradient-text">Portfolio</a>
+                <div class="hidden md:flex items-center gap-8">
+                    <a href="#home" class="nav-link text-gray-300 hover:text-white transition">Home</a>
+                    <a href="#about" class="nav-link text-gray-300 hover:text-white transition">About</a>
+                    <a href="#skills" class="nav-link text-gray-300 hover:text-white transition">Skills</a>
+                    <a href="#projects" class="nav-link text-gray-300 hover:text-white transition">Projects</a>
+                    <a href="#contact" class="nav-link text-gray-300 hover:text-white transition">Contact</a>
+                </div>
+                <button id="menuBtn" class="md:hidden text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden glass mx-4 rounded-2xl p-6 mt-2">
+            <div class="flex flex-col gap-4">
+                <a href="#home" class="text-gray-300 hover:text-white transition py-2">Home</a>
+                <a href="#about" class="text-gray-300 hover:text-white transition py-2">About</a>
+                <a href="#skills" class="text-gray-300 hover:text-white transition py-2">Skills</a>
+                <a href="#projects" class="text-gray-300 hover:text-white transition py-2">Projects</a>
+                <a href="#contact" class="text-gray-300 hover:text-white transition py-2">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="absolute top-20 right-20 w-72 h-72 bg-purple-600/30 blob blur-3xl"></div>
+        <div class="absolute bottom-20 left-20 w-96 h-96 bg-blue-600/20 blob blur-3xl" style="animation-delay: -4s;"></div>
+        
+        <div class="max-w-7xl mx-auto px-6 py-32 grid lg:grid-cols-2 gap-12 items-center relative z-10">
+            <div class="space-y-8">
+                <div class="space-y-4">
+                    <p class="text-purple-400 font-medium tracking-wider uppercase">Welcome to my portfolio</p>
+                    <h1 class="text-5xl md:text-7xl font-bold leading-tight">
+                        Hi, I'm <span class="gradient-text playfair">Pratik Shinde</span>
+                    </h1>
+                    <div class="text-2xl md:text-3xl text-gray-400">
+                        I'm a <span id="typed" class="text-white font-semibold typing-cursor"></span>
+                    </div>
+                </div>
+                <p class="text-gray-400 text-lg max-w-lg leading-relaxed">
+                    A passionate third-year Computer Management student with a strong interest in Cloud Computing and AWS. 
+                    Eager to learn and build innovative digital solutions using modern technologies.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#projects" class="gradient-bg px-8 py-4 rounded-full font-semibold hover:opacity-90 transition transform hover:scale-105 inline-flex items-center gap-2">
+                        View My Work <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="#about" class="border-2 border-purple-500 px-8 py-4 rounded-full font-semibold hover:bg-purple-500/20 transition inline-flex items-center gap-2">
+                        <i class="fas fa-user"></i> About Me
+                    </a>
+                </div>
+                <div class="flex gap-6 pt-4">
+                    <a href="https://github.com/pratikshinde" target="_blank" class="text-gray-400 hover:text-white text-2xl transition transform hover:scale-125 hover:-translate-y-1">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://linkedin.com/in/pratikshinde" target="_blank" class="text-gray-400 hover:text-blue-400 text-2xl transition transform hover:scale-125 hover:-translate-y-1">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="relative flex justify-center">
+                <div class="relative">
+                    <div class="w-72 h-72 md:w-96 md:h-96 rounded-full gradient-bg p-1">
+                        <div class="w-full h-full rounded-full bg-gray-900 flex items-center justify-center overflow-hidden">
+                            <div class="text-8xl md:text-9xl">👨‍💻</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <a href="#about" class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down text-2xl text-purple-400"></i>
+        </a>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="fade-in relative">
+                    <div class="relative">
+                        <div class="w-full aspect-square max-w-md mx-auto rounded-3xl overflow-hidden">
+                            <div class="w-full h-full bg-gradient-to-br from-purple-600/20 to-blue-600/20 flex items-center justify-center">
+                                <div class="text-center p-8">
+                                    <div class="text-9xl mb-4">☁️</div>
+                                    <p class="text-gray-400">Cloud Computing Enthusiast</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="absolute -bottom-6 -right-6 w-32 h-32 gradient-bg rounded-2xl -z-10"></div>
+                        <div class="absolute -top-6 -left-6 w-24 h-24 border-4 border-purple-500 rounded-2xl -z-10"></div>
+                    </div>
+                </div>
+                
+                <div class="fade-in space-y-6">
+                    <p class="text-purple-400 font-medium tracking-wider uppercase">About Me</p>
+                    <h2 class="text-4xl md:text-5xl font-bold">
+                        A passionate <span class="gradient-text">Computer Management</span> Student
+                    </h2>
+                    <p class="text-gray-400 text-lg leading-relaxed">
+                        I'm a third-year Computer Management student with a strong passion for technology and innovation. 
+                        I have a keen interest in <span class="text-purple-400 font-semibold">Cloud Computing</span>, especially <span class="text-orange-400 font-semibold">AWS (Amazon Web Services)</span>.
+                    </p>
+                    <p class="text-gray-400 text-lg leading-relaxed">
+                        Currently focused on enhancing my skills in cloud technologies, web development, and database management. 
+                        I love exploring AWS services, building web applications, and solving real-world problems through code.
+                        I'm always eager to learn and take on new challenges that help me grow as a developer.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 py-8">
+                        <div class="text-center">
+                            <div class="text-4xl font-bold gradient-text" data-count="6">0</div>
+                            <p class="text-gray-400 mt-1">Projects</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold gradient-text">1</div>
+                            <p class="text-gray-400 mt-1">Remote Internship</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold gradient-text" data-count="3">0</div>
+                            <p class="text-gray-400 mt-1">Years Study</p>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold gradient-text" data-count="3">0</div>
+                            <p class="text-gray-400 mt-1">Certificates</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-32 relative bg-gray-900/50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <p class="text-purple-400 font-medium tracking-wider uppercase mb-4">My Skills</p>
+                <h2 class="text-4xl md:text-5xl font-bold">
+                    What I <span class="gradient-text">Bring to the Table</span>
+                </h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12">
+                <div class="fade-in space-y-6">
+                    <h3 class="text-2xl font-bold mb-8">Technical Skills</h3>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Java</span>
+                                <span class="text-purple-400">85%</span>
+                            </div>
+                            <div class="h-3 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full gradient-bg rounded-full" data-width="85%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">PHP</span>
+                                <span class="text-purple-400">80%</span>
+                            </div>
+                            <div class="h-3 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full gradient-bg rounded-full" data-width="80%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">SQL / MySQL</span>
+                                <span class="text-purple-400">88%</span>
+                            </div>
+                            <div class="h-3 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full gradient-bg rounded-full" data-width="88%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">Python</span>
+                                <span class="text-purple-400">75%</span>
+                            </div>
+                            <div class="h-3 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full gradient-bg rounded-full" data-width="75%"></div>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <span class="font-medium">AWS (Cloud Computing)</span>
+                                <span class="text-purple-400">70%</span>
+                            </div>
+                            <div class="h-3 bg-gray-800 rounded-full overflow-hidden">
+                                <div class="skill-bar h-full gradient-bg rounded-full" data-width="70%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="fade-in">
+                    <h3 class="text-2xl font-bold mb-8">Technologies I Use</h3>
+                    <div class="grid grid-cols-3 sm:grid-cols-3 gap-4">
+                        <div class="card-hover glass p-6 rounded-2xl text-center group cursor-pointer">
+                            <i class="fab fa-aws text-4xl text-orange-400 group-hover:scale-110 transition"></i>
+                            <p class="mt-2 text-sm text-gray-400">AWS</p>
+                        </div>
+                        <div class="card-hover glass p-6 rounded-2xl text-center group cursor-pointer">
+                            <i class="fab fa-python text-4xl text-yellow-400 group-hover:scale-110 transition"></i>
+                            <p class="mt-2 text-sm text-gray-400">Python</p>
+                        </div>
+                        <div class="card-hover glass p-6 rounded-2xl text-center group cursor-pointer">
+                            <i class="fab fa-php text-4xl text-indigo-400 group-hover:scale-110 transition"></i>
+                            <p class="mt-2 text-sm text-gray-400">PHP</p>
+                        </div>
+                        <div class="card-hover glass p-6 rounded-2xl text-center group cursor-pointer">
+                            <i class="fas fa-database text-4xl text-blue-400 group-hover:scale-110 transition"></i>
+                            <p class="mt-2 text-sm text-gray-400">MySQL</p>
+                        </div>
+                        <div class="card-hover glass p-6 rounded-2xl text-center group cursor-pointer">
+                            <i class="fab fa-java text-4xl text-red-400 group-hover:scale-110 transition"></i>
+                            <p class="mt-2 text-sm text-gray-400">Java</p>
+                        </div>
+                        <div class="card-hover glass p-6 rounded-2xl text-center group cursor-pointer">
+                            <i class="fab fa-microsoft text-4xl text-blue-500 group-hover:scale-110 transition"></i>
+                            <p class="mt-2 text-sm text-gray-400">Azure</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-32 relative">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <p class="text-purple-400 font-medium tracking-wider uppercase mb-4">My Work</p>
+                <h2 class="text-4xl md:text-5xl font-bold">
+                    Featured <span class="gradient-text">Projects</span>
+                </h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 - Car Rental System -->
+                <div class="fade-in card-hover group">
+                    <div class="relative rounded-3xl overflow-hidden">
+                        <div class="aspect-video bg-gradient-to-br from-purple-900 to-blue-900 flex items-center justify-center">
+                            <span class="text-6xl">🚗</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Car Rental System</h3>
+                        <p class="text-gray-400 mb-4">A complete car rental management system with booking, availability tracking, and customer management.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">PHP</span>
+                            <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">MySQL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 - Shoes Store -->
+                <div class="fade-in card-hover group">
+                    <div class="relative rounded-3xl overflow-hidden">
+                        <div class="aspect-video bg-gradient-to-br from-green-900 to-teal-900 flex items-center justify-center">
+                            <span class="text-6xl">👟</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Shoes Store</h3>
+                        <p class="text-gray-400 mb-4">An e-commerce platform for shoes with product catalog, shopping cart, and order management features.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">PHP</span>
+                            <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">MySQL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 - Fashion Store -->
+                <div class="fade-in card-hover group">
+                    <div class="relative rounded-3xl overflow-hidden">
+                        <div class="aspect-video bg-gradient-to-br from-pink-900 to-purple-900 flex items-center justify-center">
+                            <span class="text-6xl">👗</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Fashion Store</h3>
+                        <p class="text-gray-400 mb-4">A stylish fashion e-commerce website with categories, filters, and user-friendly shopping experience.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">PHP</span>
+                            <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">MySQL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 - Employee Leave Management System -->
+                <div class="fade-in card-hover group">
+                    <div class="relative rounded-3xl overflow-hidden">
+                        <div class="aspect-video bg-gradient-to-br from-blue-900 to-cyan-900 flex items-center justify-center">
+                            <span class="text-6xl">📋</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Employee Leave Management</h3>
+                        <p class="text-gray-400 mb-4">A system for managing employee leave requests, approvals, and tracking leave balances.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">Java</span>
+                            <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">MySQL</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 - Rock Paper Scissors -->
+                <div class="fade-in card-hover group">
+                    <div class="relative rounded-3xl overflow-hidden">
+                        <div class="aspect-video bg-gradient-to-br from-orange-900 to-red-900 flex items-center justify-center">
+                            <span class="text-6xl">✊</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Rock Paper Scissors</h3>
+                        <p class="text-gray-400 mb-4">An interactive game with score tracking and play against computer functionality.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">Python</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 - Tic Tac Toe -->
+                <div class="fade-in card-hover group">
+                    <div class="relative rounded-3xl overflow-hidden">
+                        <div class="aspect-video bg-gradient-to-br from-yellow-900 to-amber-900 flex items-center justify-center">
+                            <span class="text-6xl">⭕</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Tic Tac Toe</h3>
+                        <p class="text-gray-400 mb-4">Classic Tic Tac Toe game with two-player mode and win detection algorithm.</p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-purple-500/20 text-purple-400 rounded-full text-sm">Python</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-32 relative">
+        <div class="absolute top-0 right-0 w-96 h-96 bg-purple-600/10 blob blur-3xl"></div>
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16 fade-in">
+                <p class="text-purple-400 font-medium tracking-wider uppercase mb-4">Get In Touch</p>
+                <h2 class="text-4xl md:text-5xl font-bold">
+                    Let's <span class="gradient-text">Connect</span>
+                </h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-16">
+                <div class="fade-in space-y-8">
+                    <p class="text-gray-400 text-lg">
+                        I'm always open to discussing new projects, creative ideas, or opportunities to learn and grow. 
+                        Feel free to reach out to me!
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 glass rounded-2xl flex items-center justify-center">
+                                <i class="fas fa-envelope text-purple-400 text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 text-sm">Email</p>
+                                <a href="mailto:pratikshinde@example.com" class="text-lg hover:text-purple-400 transition">pratikshinde@example.com</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 glass rounded-2xl flex items-center justify-center">
+                                <i class="fas fa-phone text-purple-400 text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 text-sm">Phone</p>
+                                <a href="tel:+1234567890" class="text-lg hover:text-purple-400 transition">+91 1234567890</a>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center gap-4">
+                            <div class="w-14 h-14 glass rounded-2xl flex items-center justify-center">
+                                <i class="fas fa-map-marker-alt text-purple-400 text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 text-sm">Location</p>
+                                <p class="text-lg">India</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex gap-4 pt-4">
+                        <a href="https://github.com/pratikshinde" target="_blank" class="w-12 h-12 glass rounded-xl flex items-center justify-center text-gray-400 hover:text-white hover:bg-purple-500/30 transition">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                        <a href="https://linkedin.com/in/pratikshinde" target="_blank" class="w-12 h-12 glass rounded-xl flex items-center justify-center text-gray-400 hover:text-white hover:bg-purple-500/30 transition">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="fade-in">
+                    <form id="contactForm" class="glass p-8 rounded-3xl space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Your Name</label>
+                                <input type="text" required class="w-full bg-gray-800/50 border border-gray-700 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition" placeholder="John Doe">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-2">Your Email</label>
+                                <input type="email" required class="w-full bg-gray-800/50 border border-gray-700 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition" placeholder="john@example.com">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Subject</label>
+                            <input type="text" required class="w-full bg-gray-800/50 border border-gray-700 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition" placeholder="Project Inquiry">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2">Message</label>
+                            <textarea required rows="5" class="w-full bg-gray-800/50 border border-gray-700 rounded-xl px-4 py-3 focus:outline-none focus:border-purple-500 transition resize-none" placeholder="Tell me about your project..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full gradient-bg py-4 rounded-xl font-semibold hover:opacity-90 transition transform hover:scale-[1.02] flex items-center justify-center gap-2">
+                            Send Message <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-gray-400">© 2024 Pratik Shinde. All rights reserved.</p>
+                <p class="text-gray-400">Designed & Built with <span class="text-red-400">❤</span></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Typing Effect
+        const typed = document.getElementById('typed');
+        const phrases = ['Computer Management Student', 'Cloud Computing Enthusiast', 'AWS Explorer', 'Web Developer'];
+        let phraseIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeEffect() {
+            const currentPhrase = phrases[phraseIndex];
+            
+            if (isDeleting) {
+                typed.textContent = currentPhrase.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typed.textContent = currentPhrase.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 100;
+
+            if (!isDeleting && charIndex === currentPhrase.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % phrases.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(typeEffect, typeSpeed);
+        }
+
+        typeEffect();
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Navbar Background on Scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('glass');
+            } else {
+                navbar.classList.remove('glass');
+            }
+        });
+
+        // Scroll Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Animate skill bars
+                    if (entry.target.querySelector('.skill-bar')) {
+                        entry.target.querySelectorAll('.skill-bar').forEach(bar => {
+                            bar.style.width = bar.dataset.width;
+                        });
+                    }
+                    
+                    // Animate counters
+                    entry.target.querySelectorAll('[data-count]').forEach(counter => {
+                        animateCounter(counter);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Counter Animation
+        function animateCounter(element) {
+            const target = parseInt(element.dataset.count);
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+
+            const updateCounter = () => {
+                current += step;
+                if (current < target) {
+                    element.textContent = Math.floor(current) + '+';
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    element.textContent = target + '+';
+                }
+            };
+
+            updateCounter();
+        }
+
+        // Contact Form
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const btn = this.querySelector('button');
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+            btn.disabled = true;
+            
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+                btn.classList.remove('gradient-bg');
+                btn.classList.add('bg-green-600');
+                
+                setTimeout(() => {
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                    btn.classList.add('gradient-bg');
+                    btn.classList.remove('bg-green-600');
+                    this.reset();
+                }, 2000);
+            }, 1500);
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
